@@ -1,0 +1,23 @@
+#!/bin/bash
+
+IN_SQL=""
+DIR=$(dirname "$0")
+
+
+if [ $# -gt 0 ]; then
+    if [ $1 != "-?" ] && [ $1 != "--help" ]; then
+        while read line
+        do
+            IN_SQL="${IN_SQL} $line"
+        done < "/dev/stdin"
+    fi
+fi
+
+
+JAR_DIR="$DIR/../target/uberjar/*"
+if [ -d "$DIR/jdbc-pipe-jars" ]; then
+	JAR_DIR="$DIR/jdbc-pipe-jars/*"
+fi
+
+
+echo "$IN_SQL" | java -cp "$JAR_DIR" jdbc_pipe.core $@
