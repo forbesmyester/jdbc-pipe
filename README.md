@@ -15,7 +15,9 @@ Quick JDBC queries respecting UNIX conventions (environmental variables, STDIN, 
 
 ## Usage
 
+```bash
 echo 'SELECT * FROM "@user".table_name limit 50' | java -cp "$PWD/target/uberjar/*" jdbc_pipe.core  csv -u username -p password -c "jdbc:url" -d "com.data-vendor.Driver" -s "sub-protocol"
+```
 
 ## Options
 
